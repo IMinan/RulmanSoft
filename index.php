@@ -53,7 +53,7 @@
           <p><?php echo substr(get_options('information', 'val_1', false), 0, 85).' ...'; ?></p>
           <a href="<?php echo $theme_url; ?>/about.php" class="">Devamını oku >></a>
         </div><!--/  /-->
-    
+
         <div class="col-md-4">
           <img src="image/logo_one.png" class="img-responsive" alt="" />
         </div><!--/ .col-md-4 /-->
@@ -80,7 +80,7 @@
           </div><!--/ .col-md-4 /-->
 
           <div class="col-md-8">
-            <p><?php echo $news->content; ?></p>
+            <p><?php echo substr($news->content, 0, 70); ?></p>
             <a href="<?php echo $theme_url; ?>/news.php?id=<?php echo $news->id; ?>">Detaylar..</a>
           </div><!--/ .col-md-8 /-->
         </div><!--/ .row /-->

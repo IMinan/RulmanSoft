@@ -48,6 +48,18 @@
 	<?php endif; ?>
 
 	<div class="row">
+		<div class="col-md-12">
+		<?php
+			if(isset($_POST['order_now']))
+			{
+
+			}
+
+		?>
+		</div>
+	</div>
+
+	<div class="row">
 		<div class="col-md-5" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
 			<table class="table table-condensed fs-13">
 				<tr>
@@ -80,7 +92,7 @@
 				<tr>
 					<th>Yetkili Adı</th>
 					<td>:</td>
-					<td><?php echo $corporate['name']; ?> <?php echo $corporate['surname']; ?></td>
+					<td><?php echo $corporate['name']; ?></td>
 				</tr>
 				<tr>
 					<th>Gsm</th>
@@ -100,12 +112,126 @@
 						<th></th>
 				</tfoot>
 			</table>
+
+			<?php if($list['price'] == 0): ?>
+			<?php else: ?>
+			<div class="row">
+				<div class="col-md-6">
+					<a href="#" class="btn btn-success btn-lg" data-toggle="modal" data-target="#order_now">Hemen Al</a>
+				</div><!--/ .col-md-6 /-->
+
+				<div class="col-md-6">
+					<a href="#" class="btn btn-warning btn-lg">Sepete Ekle</a>
+				</div><!--/ .col-md-6 /-->
+			</div><!--/ .row /-->
+		<?php endif; // if($list['price'] == 0): ?>
 		</div> <!-- /.col-md-5 -->
+
+			<?php if(is_login()): $current_id = $_SESSION['login_id']; $current_user = get_user($current_id); if($current_user['user_type'] == 'user'):?>
+				<?php
+					if(isset($_POST['order_now']))
+					{
+						$amount = form_input_control($_POST['amount']);
+
+						$order['date'] = Date('Y-m-d H:i:s');
+						$order['microtime'] = $_POST['microtime'];
+						$order['company_name'] = $current_user['company_name'];
+						$order['name'] = $current_user['name'];
+						$order['surname'] = $current_user['surname'];
+						$order['phone'] = $current_user['gsm'];
+						$order['address'] = $current_user['address'];
+						$order['district'] = $current_user['district'];
+						$order['city'] = $current_user['city'];
+						$order['country'] = $current_user['country'];
+						$order['product_brand'] = brand($list['brand_id']);
+						$order['product_code'] = $list['code'];
+						$order['product_id'] = $list['id'];
+						$order['amount'] = $amount;
+						$order['sale_price'] = $list['price'];
+
+						if(add_orders($order))
+						{
+							$code = brand($list['brand_id']).' '.$list['code'].' '.$list['code_type'];
+							echo '<div class="col-md-7">';
+							get_alert('Siperişinizin Tüm Detaylarını Yönetim Panelinden Görebilirsiniz.', ' '. $amount. ' Adet '. $code .'', 'success');
+							echo '</div>';
+						}
+						else
+						{
+							echo '<div class="col-md-7">';
+							get_alert("Veritabanı Hatası");
+							echo '</div>';
+						}
+					}
+				?>
+
+			<div id="order_now" class="modal fade" tabindex="-1" role="dialog">
+				<form action="" method="post" class="validate">
+				<div class="modal-dialog">
+				  <div class="modal-content">
+				    <div class="modal-header">
+				      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				      <h3 class="text-danger modal-title"><?php echo brand($list['brand_id']); ?></span> <?php echo $list['code']; ?> <?php echo $list['code_type']; ?></h3>
+				    </div><!--/ .modal-header /-->
+				    <div class="modal-body">
+				    	<div class="row">
+								<div class="col-md-6">
+									<table class="table table-bordered table-condensed fs-13">
+										<tr>
+											<th>Firma</th>
+											<td>:</td>
+											<td><span itemprop="seller"><?php echo $corporate['company_name']; ?></span></td>
+										</tr>
+										<tr>
+											<th>Yetkili Adı</th>
+											<td>:</td>
+											<td><?php echo $corporate['name']; ?> <?php echo $corporate['surname']; ?></td>
+										</tr>
+										<tr>
+											<th>Gsm</th>
+											<td>:</td>
+											<td><?php echo $corporate['gsm']; ?></td>
+										</tr>
+										<tr>
+											<th>E-posta</th>
+											<td>:</td>
+											<td><?php echo $corporate['email']; ?></td>
+										</tr>
+									</table>
+								</div><!--/ .col-md-6 /-->
+
+								<div class="col-md-6">
+									<h4>
+										<?php if($list['currency'] == '0'): ?>
+											<meta itemprop="priceCurrency" content="TRY" />
+										<?php elseif($list['currency'] == '1'): ?>
+											<meta itemprop="priceCurrency" content="USD" />
+										<?php elseif($list['currency'] == '1'): ?>
+											<meta itemprop="priceCurrency" content="EUR" />
+										<?php endif; ?>
+										<span itemprop="price"><?php echo number_format($list['price'],2); ?> <?php echo currency_to_text($list['currency']); ?></span>
+										<link itemprop="availability" href="http://schema.org/InStock"/>
+									</h4>
+
+									<div class="form-group mt30">
+										<label for="amount">Adet Giriniz</label>
+										<input type="number" name="amount" id="amount" placeholder="Adet" class="form-control required">
+									</div><!--/ .form-group /-->
+								</div><!--/ .col-md-6 /-->
+				    	</div><!--/ .row /-->
+				    </div><!--/ .modal-body /-->
+				    <div class="modal-footer">
+							<?php html_microtime(); ?>
+							<input type="submit" name="order_now" value="Şiparişi Onayla" class="btn btn-success">
+				    </div><!--/ .modal-footer /-->
+				  </div><!-- /.modal-content -->
+				</div><!-- /.modal-dialog -->
+				</form>
+			</div><!-- /.modal -->
+
 		<div class="col-md-7">
-
-
 			<?php
-			if(isset($_POST['microtime']))
+			if(isset($_POST['microtime']) and isset($_POST['send_message']))
 			{
 				$message['name_surname'] = mb_ucwords(form_input_control($_POST['name_surname']));
 				$message['phone'] = form_input_control($_POST['phone']);
@@ -120,68 +246,53 @@
 				}
 				else
 				{
-					get_alert('Bilinmeyen bir hata oluştu, mesaj gönderilemedi.', '', 'danger', false);
+					get_alert('Tüm Bölümleri Dorğru girdiğinizden emin olduktan sonra tekrar deneyiniz.', '', 'danger', false);
 				}
 			}
 			?>
 
-			<?php
-			if($list['price'] == 0){ $message = 'Merhaba, '.brand($list['brand_id']).' '.$list['code'].' '.$list['code_type'].' ürününüz ile ilgili fiyat teklifi alabilir miyim?'; }
-			else { $message = ''; }
-
-			if(is_login())
-			{
-				$f_name = active_user('display_name');
-				$f_mail = active_user('email');
-				$f_gsm  = active_user('gsm');
-				$f_readonly = 'readonly';
-			}
-			else
-			{
-				$f_name = '';
-				$f_mail = '';
-				$f_gsm = '';
-				$f_readonly = '';
-			}
-			?>
+			<?php if($list['price'] == 0){ $message = 'Merhaba, '.brand($list['brand_id']).' '.$list['code'].' '.$list['code_type'].' ürününüz ile ilgili fiyat teklifi alabilir miyim?'; } else { $message = ''; } ?>
 
 
-			<?php if($list['user_id'] != active_user('id')): ?>
 				<div class="bg-warning p10 radius3">
 					<form name="form_message" id="form_message" action="" method="POST" class="validate">
 						<legend><i class="fa fa-envelope-o"></i> Satıcı firmaya mesaj gönderin</legend>
 						<div class="form-group">
-							<input type="text" name="name_surname" id="name_surname" class="form-control input-sm required" minlength="3" maxlength="30" <?php echo $f_readonly; ?> placeholder="Adınız Soyadınız" value="<?php echo $f_name; ?>">
+							<input type="text" name="name_surname" id="name_surname" class="form-control input-sm required" minlength="3" maxlength="30" placeholder="Adınız Soyadınız" value="<?php echo $current_user['name']; ?> <?php echo $current_user['surname']; ?>">
 						</div> <!-- /.form-group -->
 
 						<div class="row">
 							<div class="col-md-6">
 								<div class="form-group">
-									<input type="text" name="phone" id="phone" class="form-control input-sm required validatePhone digitsOnly" minlength="10" maxlength="11" <?php echo $f_readonly; ?> placeholder="Cep Telefonu" value="<?php echo $f_gsm; ?>">
+									<input type="text" name="phone" id="phone" class="form-control input-sm required validatePhone digitsOnly" minlength="10" maxlength="11" placeholder="Cep Telefonu" value="<?php echo $current_user['gsm']; ?>">
 								</div> <!-- /.form-group -->
 							</div> <!-- /.col-md-6 -->
 							<div class="col-md-6">
 								<div class="form-group">
-									<input type="text" name="email" id="email" class="form-control input-sm required email" maxlength="100" placeholder="E-posta" <?php echo $f_readonly; ?> value="<?php echo $f_mail; ?>">
+									<input type="text" name="email" id="email" class="form-control input-sm required email" maxlength="100" placeholder="E-posta" value="<?php echo $current_user['email']; ?>">
 								</div> <!-- /.form-group -->
 							</div> <!-- /.col-md-6 -->
 						</div> <!-- /.row -->
 
 						<div class="form-group">
-							<textarea name="description" id="description" class="form-control input-sm" style="height:100px;" minlength="10" maxlength="255" placeholder="Bir mesaj yazın"><?php echo $message; ?></textarea>
+							<textarea name="description" id="description" required class="form-control input-sm required" style="height:100px;" minlength="10" maxlength="255" placeholder="Bir mesaj yazın"><?php echo $message; ?></textarea>
 						</div> <!-- /.form-group -->
 						<div class="text-right">
 							<?php html_microtime(); ?>
+							<input type="hidden" name="send_message">
 							<button class="btn btn-default btn-sm">Mesaj Gönder</button>
 						</div> <!-- /.text-right -->
 					</form>
 				</div> <!-- /.bg-muted -->
-			<?php else: ?>
-				<div class="bg-warning p10 radius3">
-					Bu liste <strong>Firmanıza </strong> ait olduğu için teklif gönderemezsiniz.
-				</div> <!-- /.bg-warning -->
-			<?php endif; ?>
 		</div> <!-- /.col-md-7 -->
+		<?php else: ?>
+			<div class="col-md-7">
+				<div class="bg-warning p10 radius3">
+					Satıcı Firmaya Mesaj Döndermek İçin <strong><a href="<?php echo $theme_url; ?>/register.php">Üye</a> </strong>Olmanız Gerekmekte.
+				</div> <!-- /.bg-warning -->
+			</div><!--/ .col-md-7 /-->
+		<?php endif; ?>
+	<?php endif; ?>
 	</div> <!-- /.row -->
 
 </div> <!-- /.col-md-10 -->

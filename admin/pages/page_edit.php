@@ -17,6 +17,8 @@
           if($_POST){
             $title = $_POST['title'];
             $content = $_POST['content'];
+            $m_short = $_POST['m_short'];
+            $m_title = $_POST['m_title'];
             if(!$title || !$content){
           		echo get_alert('Tüm Alanları eksiksiz şekilde Doldurunuz');
           	}
@@ -25,7 +27,7 @@
               echo get_alert('İçerik alanı en az 10 karakter olmalı.');
             }
             else{
-              if(edit_pages($id, $title, $content))
+              if(edit_pages($id, $title, $content, $m_short, $m_title, $theme_url."/pages.php?id=".$id))
               {
                 $page = get_page($id);
                 echo get_alert("Sayfa Başarılı Bir Şekilde Güncellendi", "Sayfa Güncellendi", "success");
@@ -42,9 +44,39 @@
             <textarea name="content" style="outline: none;" class="form-control" rows="8" cols="40"><?php echo $page->content; ?></textarea>
           </div><!--/ .form-group /-->
 
+          <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-4">
+              <div style="height:5px;"></div>
+              <label class="text-muted" style="cursor:pointer;"> <input type="checkbox" name="is_menu" id="is_menu" value="1" <?php if($page->m_short > 0){echo'checked';}else{} ?>> <small>Site menüsünde gösterilsin mi?</small></label>
+            </div> <!-- /.col-md-4 -->
+            <div class="col-md-4">
+              <div class="form-group m_items"><input type="text" name="m_title" id="m_title" class="form-control input-sm" value="<?php echo $page->m_title; ?>" placeholder="Menü Adı"/></div>
+            </div> <!-- /.col-md-4 -->
+            <div class="col-md-2">
+              <div class="form-group m_items"><input type="text" name="m_short" id="m_short" class="form-control input-sm" value="<?php if($page->m_short == '0'){echo'';}else{echo $page->m_short;} ?>" placeholder="Sıralama (0,1,2,7,8...)" /></div>
+            </div> <!-- /.col-md-4 -->
+          </div> <!-- /.form-group -->
+
+          <script>
+          $(document).ready(function() {
+            $('#is_menu').change(function() {
+              if($(this).is(':checked'))
+              {
+                $('.m_items').show('slide');
+              }
+              else {
+                $('.m_items').hide('slide');
+              }
+            });
+            <?php if($page->m_short == 0){echo "  $('.m_items').hide();";}else{} ?>
+          });
+
+          </script>
+
           <div class="form-group text-right">
             <input type="submit" name="submit" class="btn btn-success" value="Kaydet">
-          </div><!--/ .form-group /-->
+          </div><!--/ .row /-->
         </form>
       <?php else: ?>
         <?php get_alert("Aradığınız Sayfa Bulunamadı!"); ?>

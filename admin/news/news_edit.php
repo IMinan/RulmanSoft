@@ -25,8 +25,13 @@
               echo get_alert('İçerik alanı en az 10 karakter olmalı.');
             }
             else{
-              $uploaded_img = img_upload($foo);
-              $img_name = $uploaded_img->file_dst_name;
+              if($uploaded_img = img_upload($foo)){
+                $img_name = $uploaded_img->file_dst_name;
+              }
+              else
+              {
+                $img_name = $news->list_img;
+              }
 
               if(edit_news($id, $title, $content, $img_name))
               {

@@ -11,6 +11,7 @@ function mysqli()
 
 
 // default
-$site_url = 'http://localhost/sablon/night_blue/admin';
-$theme_url = 'http://localhost/sablon/night_blue';
+$site_url = 'http://localhost/RulmanSoft/admin';
+$theme_url = 'http://localhost/RulmanSoft';
+$account_url = 'http://localhost/RulmanSoft/accounts';
 ?>

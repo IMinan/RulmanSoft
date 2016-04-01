@@ -1,4 +1,4 @@
-<?php if(is_login()): ?>
+<?php if(is_login()): $current_id = $_SESSION['login_id']; $user = get_user($current_id); if($user['user_type'] == 'corporate'): ?>
 <nav class="admin-menu nav navbar-inverse">
   <div class="container">
     <div class="row">
@@ -63,4 +63,4 @@
     background: #333 !important;
   }
 </style>
-<?php endif; ?>
+<?php endif;  endif;?>

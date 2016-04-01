@@ -17,7 +17,7 @@ session_start();
 <!DOCTYPE html>
 <html lang="en">
  	<head>
- 		<title>Night-Blue</title>
+ 		<title><?php get_options('building_info', 'val_1', true); ?></title>
 	 	<meta charset="utf-8">
 	 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -30,10 +30,13 @@ session_start();
 	 	<script src="js/jquery.js"></script>
 		<script src="js/bootstrap.min.js"></script>
     <script src="js/main.js"></script>
+    <script src="js/validation.js"></script>
+    <script src="js/app.js"></script>
  	</head>
  	<body>
 
   <?php include 'admin/admin_menu.php'; ?>
+  <?php include 'admin/account_menu.php'; ?>
 
   <div class="container">
     <header>
@@ -71,10 +74,10 @@ session_start();
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
               <li><a href="<?php echo $theme_url; ?>">Ana Sayfa</a></li>
-              <li><a href="<?php echo $theme_url; ?>/news.php">Haberler</a></li>
-              <li><a href="<?php echo $theme_url; ?>/search.php">Ürünlerimiz</a></li>
-              <li><a href="<?php echo $theme_url; ?>/about.php">Hakkımızda</a></li>
-              <li><a href="<?php echo $theme_url; ?>/contact.php">İletişim</a></li>
+              <?php index_navigation(); ?>
+              <li><a href="<?php echo $theme_url."/contact.php"; ?>">İletişim</a></li>
+              <li><a href="<?php echo $theme_url."/register.php"; ?>">Üye ol</a></li>
+              <li><a href="<?php echo $theme_url."/login.php"; ?>">Giriş</a></li>
             </ul>
           </div><!--/ .collapse /-->
         </div><!--/ .top-menu /-->

@@ -63,8 +63,9 @@
 	<link rel="icon" href="<?php echo site_url('img/favicon.ico'); ?>" type="image/ico"/>
 
 	<!-- bootstrap -->
-	<link rel="stylesheet" href="<?php echo site_url('css/bootstrap.min.css'); ?>">
 	<script src="<?php echo site_url('js/jquery.min.js'); ?>"></script>
+	<script src="<?php echo site_url('js/validation.js'); ?>"></script>
+	<link rel="stylesheet" href="<?php echo site_url('css/bootstrap.min.css'); ?>">
 	<script src="<?php echo site_url('js/bootstrap.min.js'); ?>"></script>
 
 	<!-- fontawesome -->
@@ -74,13 +75,11 @@
 	<link rel="stylesheet" type="text/css" href="<?php echo site_url('css/datatables.min.css'); ?>"/>
  	<script type="text/javascript" src="<?php echo site_url('js/datatables.min.js'); ?>"></script>
 
-
 	<!-- custom style -->
 	<link rel="stylesheet" href="<?php echo site_url('css/app.css'); ?>">
 	<script src="<?php echo site_url('js/app.js'); ?>"></script>
-	  <script src="<?php echo site_url('js/nicEdit.js'); ?>"></script>
-
-
+  <script src="<?php echo site_url('js/nicEdit.js'); ?>"></script>
+	<script src="<?php echo site_url('js/app.js'); ?>"></script>
 
 	<meta property="og:site_name" content="RulmanListesi | rulmanlistesi.com>"/>
 	<meta property="og:title" content="<?php echo $meta['title']; ?>"/>

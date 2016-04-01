@@ -20,8 +20,47 @@ function site_url($variable='')
 	{
 		return $site_url.'/'.$variable;
 	}
-
 }
+
+
+/*
+@name: account_url
+@description: bu fonksiyon ile sistemin account dosyasının adresini alabiliriz
+@developer: Muhammet İnan
+@date: 31-03-2015
+@update_date:
+*/
+function account_url($variable='')
+{
+	global $account_url;
+	if($variable == '')
+	{
+		return $account_url;
+	}
+	else
+	{
+		return $account_url.'/'.$variable;
+	}
+}
+
+
+
+/*
+@name: index_navigation
+@description: bu fonksiyon anasayfa'daki navbar'ın elememanlarını düzenler
+@developer: Muhammet İnan
+@date: 21-03-2016
+@update_date: Null
+*/
+function index_navigation()
+{
+	$query = mysqli()->query("SELECT * FROM pages WHERE m_short > 0 ORDER BY m_short ASC ");
+	while($return = $query->fetch_object())
+	{
+		echo '<li><a href="'. $return->url .'">'. $return->m_title .'</a></li>';
+	}
+}
+
 
 /*
 @name: theme_url
@@ -212,7 +251,7 @@ function add_pages($title, $content)
 @update_date: NULL
 */
 
-function edit_pages($id, $title, $content)
+function edit_pages($id, $title, $content, $m_short, $m_title, $url)
 {
 	if(!$title || !$content){
 		echo get_alert('Tüm Alanları eksiksiz şekilde Doldurunuz');
@@ -220,7 +259,7 @@ function edit_pages($id, $title, $content)
 		$title = trim(mysqli()->real_escape_string($title));
 		$content = trim(mysqli()->real_escape_string($content));
 		$date = date("Y-m-d H:i:s");
-		$query = mysqli_query(mysqli(), "UPDATE pages SET update_date='". $date ."', title='". $title ."', content='". $content ."' WHERE id='". $id ."'");
+		$query = mysqli_query(mysqli(), "UPDATE pages SET update_date='". $date ."', title='". $title ."', content='". $content ."', m_short='". $m_short ."', m_title='". $m_title ."', url='". $url ."' WHERE id='". $id ."'");
 		if($query){
 			return true;
 		}
@@ -847,6 +886,35 @@ function get_count_list($user_id='')
 }
 
 
+/* ------------------------------------------------------------------------------- */
+/*  *****.  ORDERS
+/* ------------------------------------------------------------------------------- */
+
+/*
+@name: add_orders
+@description: Satın alımlar için ürün sepet ekleme fonksiyonu
+@developer: Muhammet İnan
+@date: 31-03-2016
+@update_date: NULL
+*/
+function add_orders($array=array())
+{
+	foreach($array as $name=>$value)
+	{
+		if(isset($table_name)){$table_name = $table_name.', '.$name;}else{$table_name = $name;}
+		if(isset($table_value)){$table_value = $table_value.", '".$value."'";}else{$table_value = "'".$value."'";}
+	}
+	$query = mysqli()->query("INSERT INTO orders (".$table_name.") VALUES (".$table_value.")");
+	if($query)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+
+	}
+}
 
 /* ------------------------------------------------------------------------------- */
 /*  *****.  LOG
@@ -907,18 +975,6 @@ function add_log($array=array())
 		return false;
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -1034,7 +1090,6 @@ function get_user($query_or_ID_or_email_or_phone)
 
 
 
-
 /*
 @name: get_all_user
 @description: db.user tablosundaki tüm üyeleri çeker ve diziye aktarır
@@ -1093,6 +1148,25 @@ function is_login()
 
 
 /*
+@name: is_account_login
+@description: bir uyenin giris yapip yapmadigi kontrol eder
+@developer: mustafa tanriverdi
+@date: 11-11-2015
+@update_date: NULL
+*/
+function is_account_login()
+{
+	if(isset($_SESSION['account_login_id']))
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+
+/*
 @name: page_access
 @description: sayfanın erişim seviyesini belirtir
 @developer: mustafa tanriverdi
@@ -1104,8 +1178,14 @@ function page_access($value)
 	if($value == 'corporate')
 	{
 		if(!is_login()){ header("Location: ".site_url()); exit(); }
-		else if(!active_user('user_type') == 'corporate'){ header("Location: ".site_url()); exit(); }
-		else {return true;}
+		else if(active_user('user_type') != 'corporate'){ header("Location: ".account_url()); exit(); }
+		else { return true; }
+	}
+	else if($value == 'user')
+	{
+		if(!is_login()){ header("Location: ".theme_url('login.php')); exit(); }
+		else if(active_user('user_type') != 'user'){ header("Location: ".site_url()); exit(); }
+		else { return true; }
 	}
 }
 

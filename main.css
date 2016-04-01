@@ -28,11 +28,51 @@ body{
   width: 1000px;
 }
 
+.alert h3{
+  margin-top: 0;
+}
+
+
+/* validation icin error style */
+input.error {
+    border-color: #843534;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 6px #ce8483;
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 6px #ce8483;
+}
+label.error {
+    font-weight: normal;
+    font-size: 11px;
+    background-color: #FDD8D8;
+    padding: 4px 6px;
+    margin-top: 5px;
+    border-radius: 2px;
+}
+#terms-error { /* bunu sadece checkbox icin yazdik, terms(kurallar) */
+    position: absolute;
+    margin-top: 20px;
+    margin-left: -20px;
+}
+
+
+
 }
 /*--------------------------------------------------------------------*/
 /* General
 /*--------------------------------------------------------------------*/
+.login-register{
+  padding: 30px;
+  background: #efefef;
+  border-radius: 4px 4px;
+}
 
+.login-register h3{
+  margin-top: 0;
+  margin-bottom: 40px;
+}
+
+.login-register .btn{
+  margin-top: 20px;
+}
 
 /* Top-nav */
 .top-nav{
