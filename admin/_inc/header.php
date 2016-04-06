@@ -79,7 +79,6 @@
 	<link rel="stylesheet" href="<?php echo site_url('css/app.css'); ?>">
 	<script src="<?php echo site_url('js/app.js'); ?>"></script>
   <script src="<?php echo site_url('js/nicEdit.js'); ?>"></script>
-	<script src="<?php echo site_url('js/app.js'); ?>"></script>
 
 	<meta property="og:site_name" content="RulmanListesi | rulmanlistesi.com>"/>
 	<meta property="og:title" content="<?php echo $meta['title']; ?>"/>
@@ -110,28 +109,28 @@
 <div class="container bg">
 	<div class="rl-menu-top">
 		<div class="row">
-			<div class="col-xs-3 col-sm-5 col-md-4">
+			<div class="col-xs-3 col-sm-5 col-md-6">
 				<a class="navbar-brand" href="<?php echo site_url(); ?>"><span><img src="<?php echo site_url(); ?>/img/logo.png" class="img-responsive logo" alt="RulmanSoft.com Logo"></span><span class="logo-text hidden-xs">RulmanSoft</span></a>
+				<a href="<?php site_url(''); ?>" class="navbar-brand-after hidden-xs"><span class="admin">Yönetim Paneli</span> <br> <?php get_options('building_info', 'val_1', true); ?></a>
 			</div> <!-- /.col-md-4 -->
-			<div class="col-md-2 hidden-xs hidden-sm">
 
-			</div> <!-- /.col-md-2 -->
 			<div class="col-xs-9 col-sm-7 col-md-6">
 				<?php if(is_login()): ?>
 					<ul class="top-menu is_login">
-						<li><a href="<?php echo site_url('message_inbox.php'); ?>"><i class="fa fa-envelope"></i><span class="count"><?php echo get_count_in_message(active_user('id')); ?></span></a></li>
+						<li><a href="<?php echo site_url('message_inbox.php'); ?>" class="hidden-xs"><i class="fa fa-envelope"></i><span class="count"><?php echo get_count_in_message(active_user('id')); ?></span></a></li>
+						<li><a href="<?php echo site_url('orders.php?status=1'); ?>" class="hidden-xs"><i class="fa fa-shopping-basket"></i><span class="count"><?php if(get_ready_orders_count(active_user('id'), 1)){ echo get_ready_orders_count(active_user('id'), 1); }else{ echo '0'; } ?></span></a></li>
 						<li class="dropdown"><a href="#" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
 							<img src="<?php echo site_url('upload/profile/24/profile.jpg'); ?>">
 							<?php echo active_user('display_name'); ?>  <span class="caret"></span></a>
-							<ul class="dropdown-menu">
+							<ul class="dropdown-menu pull-right">
 								<li><a href="<?php echo site_url('index.php'); ?>" title="Profilim"><i class="fa fa-folder-open"></i> Yönetim Paneli</a></li>
-			                  	<li role="separator" class="divider"></li>
-			                  	<li><a href="<?php echo site_url('edit_profile.php'); ?>" title="Profilim"><i class="fa fa-user"></i> Profilim</a></li>
-			                  	<li><a href="<?php echo site_url('message_inbox.php'); ?>"><i class="fa fa-envelope"></i> Mesaj Kutusu</a></li>
-			                  	<li><a href="#"><i class="fa fa-cog"></i> Ayarlar</a></li>
-			                  	<li role="separator" class="divider"></li>
-			                  	<li><a href="<?php echo site_url('logout.php'); ?>"><i class="fa fa-power-off"></i> Çıkış Yap</a></li>
-			                </ul>
+	            	<li role="separator" class="divider"></li>
+	            	<li><a href="<?php echo site_url('edit_profile.php'); ?>" title="Profilim"><i class="fa fa-user"></i> Profilim</a></li>
+	            	<li><a href="<?php echo site_url('message_inbox.php'); ?>"><i class="fa fa-envelope"></i> Mesaj Kutusu</a></li>
+	            	<li><a href="#"><i class="fa fa-cog"></i> Ayarlar</a></li>
+	            	<li role="separator" class="divider"></li>
+	            	<li><a href="<?php echo site_url('logout.php'); ?>"><i class="fa fa-power-off"></i> Çıkış Yap</a></li>
+		          </ul>
 						</li>
 					</ul> <!-- /.top-menu -->
 				<?php else: ?>

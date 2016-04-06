@@ -41,7 +41,7 @@ if(!is_login())
 	position: absolute;
 	right: 10px;
 	top: 5px;
-	color:#0D25AB;
+	color:#1b926c;
 }
 .dashboard_box span {
 	color:#7D7D7D;
@@ -53,27 +53,27 @@ if(!is_login())
 <h4>Sipariş Takibi & Mesajlaşma</h4>
 <div class="row">
 	<div class="col-md-2">
-		<a href="<?php echo account_url('message_inbox.php'); ?>" class="dashboard_box">
+		<a href="<?php echo account_url('message_inbox.php'); ?>" class="dashboard_box z-depth-1">
 			<i class="fa fa-envelope-o"></i>
 			<span>Mesaj Kutusu</span>
 		</a>
 	</div> <!-- /.col-md-2 -->
 	<div class="col-md-2">
-		<a href="<?php echo account_url('message_inbox.php'); ?>" class="dashboard_box">
+		<a href="<?php echo account_url('orders.php?status=1'); ?>" class="dashboard_box z-depth-1">
 			<i class="fa fa-shopping-basket"></i>
 			<i class="fa fa-clock-o fa2"></i>
 			<span>Yeni Sipariş</span>
 		</a>
 	</div> <!-- /.col-md-2 -->
 	<div class="col-md-2">
-		<a href="<?php echo account_url('message_inbox.php'); ?>" class="dashboard_box">
+		<a href="<?php echo account_url('orders.php?status=2'); ?>" class="dashboard_box z-depth-1">
 			<i class="fa fa-shopping-basket"></i>
 			<i class="fa fa-cubes fa2"></i>
 			<span>Hazırlanan Sipariş</span>
 		</a>
 	</div> <!-- /.col-md-2 -->
 	<div class="col-md-2">
-		<a href="<?php echo account_url('message_inbox.php'); ?>" class="dashboard_box">
+		<a href="<?php echo account_url('orders.php?status=3'); ?>" class="dashboard_box z-depth-1">
 			<i class="fa fa-shopping-basket"></i>
 			<i class="fa fa-check fa2"></i>
 			<span>Kapatılan Sipariş</span>

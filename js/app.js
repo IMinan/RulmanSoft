@@ -1,11 +1,9 @@
 $(document).ready(function() {
-
 	$(".validate").validate();
 	$(".validate_1").validate();
 	$(".validate_2").validate();
 	$(".validate_3").validate();
 	$(".validate_4").validate();
-
 
 	$.validator.addMethod(
 	    "validatePhone", //name of a virtual validator
@@ -19,8 +17,6 @@ $(document).ready(function() {
 	jQuery('.numbersOnly').keyup(function () {
 	    this.value = this.value.replace(/[^0-9\.]/g,'');
 	});
-
-
 
 
 

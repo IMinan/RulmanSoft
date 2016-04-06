@@ -46,7 +46,7 @@
     </div>
 
     <div class="col-md-6">
-      <iframe frameborder="0" height="550" marginheight="0" marginwidth="0" scrolling="no" src="https://maps.google.com/maps?f=q&amp;source=s_q&amp;hl=en&amp;geocode=&amp;q=Bendas+Rulman,+Ba%C5%9Fak%C5%9Fehir,+Turkey&amp;aq=1&amp;oq=benda%C5%9F+rulman&amp;sll=37.0625,-95.677068&amp;sspn=40.052282,79.013672&amp;t=h&amp;ie=UTF8&amp;hq=Bendas+Rulman,&amp;hnear=Ba%C5%9Fak%C5%9Fehir%2FIstanbul,+Turkey&amp;cid=7610175435778837146&amp;ll=41.098273,28.801818&amp;spn=0.00933,0.01929&amp;iwloc=A&amp;output=embed" width="450"></iframe>
+      <?php get_options("google_map", 'val_1', true); ?>
     </div>
   </div>
 

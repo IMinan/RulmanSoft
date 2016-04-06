@@ -1,5 +1,4 @@
 
-
 <div class="row">
 	<div class="col-md-1"></div>
 <div class="col-md-10 col-xs-12" itemscope itemtype="http://schema.org/Product">
@@ -15,7 +14,6 @@
 	</ol>
 
 	<h3 class="text-danger" itemprop="name"><span itemprop="brand"><?php echo brand($list['brand_id']); ?></span> <?php echo $list['code']; ?> <?php echo $list['code_type']; ?></h3>
-
 
 	<?php $result = mysqli()->query("SELECT * FROM product WHERE brand_id='".$list['brand_id']."' AND code='".$list['code']."' AND code_type='".$list['code_type']."'"); ?>
 	<?php if($result->num_rows > 0): ?>
@@ -46,18 +44,6 @@
 		</div> <!-- /.bg-muted -->
 		<div class="h20"></div>
 	<?php endif; ?>
-
-	<div class="row">
-		<div class="col-md-12">
-		<?php
-			if(isset($_POST['order_now']))
-			{
-
-			}
-
-		?>
-		</div>
-	</div>
 
 	<div class="row">
 		<div class="col-md-5" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
@@ -133,8 +119,11 @@
 					{
 						$amount = form_input_control($_POST['amount']);
 
+						$order['status'] = 1;
 						$order['date'] = Date('Y-m-d H:i:s');
+						$order['date_update'] = Date('Y-m-d H:i:s');
 						$order['microtime'] = $_POST['microtime'];
+						$order['company_id'] = $current_user['id'];
 						$order['company_name'] = $current_user['company_name'];
 						$order['name'] = $current_user['name'];
 						$order['surname'] = $current_user['surname'];
@@ -146,8 +135,10 @@
 						$order['product_brand'] = brand($list['brand_id']);
 						$order['product_code'] = $list['code'];
 						$order['product_id'] = $list['id'];
+						$order['code_type'] = $list['code_type'];
 						$order['amount'] = $amount;
 						$order['sale_price'] = $list['price'];
+						$order['currency'] = $list['currency'];
 
 						if(add_orders($order))
 						{
@@ -238,21 +229,28 @@
 				$message['email'] = strtolower(form_input_control($_POST['email']));
 				$message['description'] = form_input_control($_POST['description']);
 
-				if(is_login()){ $message['out_user_id'] = active_user('id'); } else { $message['out_user_id'] = ''; }
+				if($message['description'] == '')
+				{
+					get_alert('Mesaj Bölümü en az 10 karakter olmalıdır!');
+				}else
+				{
+					if(is_login()){ $message['out_user_id'] = active_user('id'); } else { $message['out_user_id'] = ''; }
 
-				if(add_message($message['out_user_id'], $list['user_id'], $message['description'], '', $message))
-				{
-					get_alert('Mesajınız ilgili firmaya başarı ile ulaşmıştır.', '', 'success', false);
+					if(add_message($message['out_user_id'], $list['user_id'], $message['description'], '', $message))
+					{
+						get_alert('Mesajınız ilgili firmaya başarı ile ulaşmıştır.', '', 'success', false);
+					}
+					else
+					{
+						get_alert('Tüm Bölümleri Dorğru girdiğinizden emin olduktan sonra tekrar deneyiniz.', '', 'danger', false);
+					}
 				}
-				else
-				{
-					get_alert('Tüm Bölümleri Dorğru girdiğinizden emin olduktan sonra tekrar deneyiniz.', '', 'danger', false);
-				}
+
+
 			}
 			?>
 
 			<?php if($list['price'] == 0){ $message = 'Merhaba, '.brand($list['brand_id']).' '.$list['code'].' '.$list['code_type'].' ürününüz ile ilgili fiyat teklifi alabilir miyim?'; } else { $message = ''; } ?>
-
 
 				<div class="bg-warning p10 radius3">
 					<form name="form_message" id="form_message" action="" method="POST" class="validate">
@@ -284,15 +282,16 @@
 						</div> <!-- /.text-right -->
 					</form>
 				</div> <!-- /.bg-muted -->
-		</div> <!-- /.col-md-7 -->
-		<?php else: ?>
+			</div> <!-- /.col-md-7 -->
+		<?php endif; // if($current_user['user_type'] == 'user'): ?>
+
+		<?php else: // if(is_login()):  ?>
 			<div class="col-md-7">
 				<div class="bg-warning p10 radius3">
 					Satıcı Firmaya Mesaj Döndermek İçin <strong><a href="<?php echo $theme_url; ?>/register.php">Üye</a> </strong>Olmanız Gerekmekte.
 				</div> <!-- /.bg-warning -->
 			</div><!--/ .col-md-7 /-->
-		<?php endif; ?>
-	<?php endif; ?>
+		<?php endif; // if(is_login()): ?>
 	</div> <!-- /.row -->
 
 </div> <!-- /.col-md-10 -->

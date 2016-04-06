@@ -53,33 +53,27 @@ if(!is_login())
 <h4>Liste & Stok Yönetimi</h4>
 <div class="row">
 	<div class="col-md-2">
-		<a href="<?php echo site_url('list_add.php'); ?>" class="dashboard_box">
+		<a href="<?php echo site_url('list_add.php'); ?>" class="dashboard_box z-depth-1">
 			<i class="fa fa-plus"></i>
 			<span>Yeni Stok Kartı</span>
 		</a>
 	</div> <!-- /.col-md-2 -->
 	<div class="col-md-2">
-		<a href="<?php echo site_url('list_my.php'); ?>" class="dashboard_box">
+		<a href="<?php echo site_url('list_my.php'); ?>" class="dashboard_box z-depth-1">
 			<i class="fa fa-list"></i>
 			<span>Stok <br />Listem</span>
 		</a>
 	</div> <!-- /.col-md-2 -->
 	<div class="col-md-2">
-		<a href="<?php echo site_url('stock_add.php?in'); ?>" class="dashboard_box">
+		<a href="<?php echo site_url('stock_add.php?in'); ?>" class="dashboard_box z-depth-1">
 			<i class="fa fa-barcode"></i>
 			<span>+ Stok Girişi</span>
 		</a>
 	</div> <!-- /.col-md-2 -->
 	<div class="col-md-2">
-		<a href="<?php echo site_url('stock_add.php?out'); ?>" class="dashboard_box">
+		<a href="<?php echo site_url('stock_add.php?out'); ?>" class="dashboard_box z-depth-1">
 			<i class="fa fa-barcode"></i>
 			<span>- Stok Çıkışı</span>
-		</a>
-	</div> <!-- /.col-md-2 -->
-	<div class="col-md-2">
-		<a href="#" class="dashboard_box">
-			<i class="fa fa-pie-chart"></i>
-			<span>Stok Raporu</span>
 		</a>
 	</div> <!-- /.col-md-2 -->
 </div> <!-- /.row -->
@@ -89,30 +83,45 @@ if(!is_login())
 <h4>Sipariş Takibi & Mesajlaşma</h4>
 <div class="row">
 	<div class="col-md-2">
-		<a href="<?php echo site_url('message_inbox.php'); ?>" class="dashboard_box">
+		<a href="<?php echo site_url('message_inbox.php'); ?>" class="dashboard_box z-depth-1">
 			<i class="fa fa-envelope-o"></i>
 			<span>Mesaj Kutusu</span>
 		</a>
 	</div> <!-- /.col-md-2 -->
 	<div class="col-md-2">
-		<a href="<?php echo site_url('message_inbox.php'); ?>" class="dashboard_box">
+		<a href="<?php echo site_url('orders.php?status=1'); ?>" class="dashboard_box z-depth-1">
 			<i class="fa fa-shopping-basket"></i>
 			<i class="fa fa-clock-o fa2"></i>
 			<span>Yeni Sipariş</span>
 		</a>
 	</div> <!-- /.col-md-2 -->
 	<div class="col-md-2">
-		<a href="<?php echo site_url('message_inbox.php'); ?>" class="dashboard_box">
+		<a href="<?php echo site_url('orders.php?status=2'); ?>" class="dashboard_box z-depth-1">
 			<i class="fa fa-shopping-basket"></i>
 			<i class="fa fa-cubes fa2"></i>
 			<span>Hazırlanan Sipariş</span>
 		</a>
 	</div> <!-- /.col-md-2 -->
 	<div class="col-md-2">
-		<a href="<?php echo site_url('message_inbox.php'); ?>" class="dashboard_box">
+		<a href="<?php echo site_url('orders.php?status=3'); ?>" class="dashboard_box z-depth-1">
 			<i class="fa fa-shopping-basket"></i>
 			<i class="fa fa-check fa2"></i>
 			<span>Kapatılan Sipariş</span>
+		</a>
+	</div> <!-- /.col-md-2 -->
+
+	<div class="col-md-2">
+		<a href="<?php echo site_url('orders.php?status=0'); ?>" class="dashboard_box z-depth-1">
+			<i class="fa fa-shopping-basket"></i>
+			<i class="fa fa-trash fa2"></i>
+			<span>Silinen Sipariş</span>
+		</a>
+	</div> <!-- /.col-md-2 -->
+
+	<div class="col-md-2">
+		<a href="<?php echo site_url('users.php'); ?>" class="dashboard_box z-depth-1">
+			<i class="fa fa-user"></i>
+			<span>Kullanıcı Sayfası</span>
 		</a>
 	</div> <!-- /.col-md-2 -->
 </div> <!-- /.row -->
@@ -122,37 +131,37 @@ if(!is_login())
 <h4>Diğer Ayarlar</h4>
 <div class="row">
 	<div class="col-md-2">
-		<a href="<?php echo site_url('pages/page_list.php'); ?>" class="dashboard_box">
+		<a href="<?php echo site_url('pages/page_list.php'); ?>" class="dashboard_box z-depth-1">
 			<i class="fa fa-file-text-o"></i>
 			<span>Sayfalar</span>
 		</a>
 	</div> <!-- /.col-md-2 -->
 	<div class="col-md-2">
-		<a href="<?php echo site_url('news/news_list.php'); ?>" class="dashboard_box">
+		<a href="<?php echo site_url('news/news_list.php'); ?>" class="dashboard_box z-depth-1">
 			<i class="fa fa-newspaper-o"></i>
 			<span>Haberler</span>
 		</a>
 	</div> <!-- /.col-md-2 -->
 	<div class="col-md-2">
-		<a href="<?php echo site_url('building.php'); ?>" class="dashboard_box">
+		<a href="<?php echo site_url('building.php'); ?>" class="dashboard_box z-depth-1">
 			<i class="fa fa-building"></i>
 			<span>Firma Bilgileri</span>
 		</a>
 	</div> <!-- /.col-md-2 -->
 	<div class="col-md-2">
-		<a href="<?php echo site_url('social_media.php'); ?>" class="dashboard_box">
+		<a href="<?php echo site_url('social_media.php'); ?>" class="dashboard_box z-depth-1">
 			<i class="fa fa-facebook"></i>
 			<span>Sosyal Medya</span>
 		</a>
 	</div> <!-- /.col-md-2 -->
 	<div class="col-md-2">
-		<a href="<?php echo site_url('google_analytics.php'); ?>" class="dashboard_box">
+		<a href="<?php echo site_url('google_analytics.php'); ?>" class="dashboard_box z-depth-1">
 			<i class="fa fa-google"></i>
 			<span>Analistik Kodları</span>
 		</a>
 	</div> <!-- /.col-md-2 -->
 	<div class="col-md-2">
-		<a href="<?php echo site_url('message_inbox.php'); ?>" class="dashboard_box">
+		<a href="<?php echo site_url('message_inbox.php'); ?>" class="dashboard_box z-depth-1">
 			<i class="fa fa-ambulance"></i>
 			<span>Teknik Destek</span>
 		</a>

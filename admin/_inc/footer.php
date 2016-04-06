@@ -3,8 +3,7 @@
 <footer>
 	<div class="footer-bottom">
 		<div class="container">
-			<div class="pull-left">© RulmanSoft.com, 2015 tüm hakları saklıdır.</div>
-			<div class="pull-right">© Alt yapı <a href="http://tilpark.com" title="Tilpark" target="_blank" style="text-decoration:underline;">tilpark.com</a> ekibi tarafından yazılmıştır.</div>
+			<div class="pull-right">© Alt yapı <a href="http://rulmansoft.com" title="RulmanSoft" target="_blank" style="text-decoration:underline;">RulmanSoft.com</a> ekibi tarafından yazılmıştır.</div>
 		</div> <!-- /.container -->
 	</div> <!-- /.footer-bottom -->
 </footer>

@@ -239,7 +239,7 @@ function add_pages($title, $content)
 	$date = date("Y-m-d H:i:s");
 	$query = mysqli_query(mysqli(), "INSERT INTO pages (date, title, content) VALUES ('".$date."', '".$title."', '".$content."')");
 	if($query){
-		return true;
+		return mysqli()->insert_id;
 	}else{ }
 }
 
@@ -916,6 +916,132 @@ function add_orders($array=array())
 	}
 }
 
+/*
+@name: get_orders
+@description: orders tablosunun verişlerini çekme için kullanılır
+@developer: Muhammet İnan
+@date: 04-04-2016
+@update_date: NULL
+*/
+
+function get_orders($status, $company_id)
+{
+	$user = get_user(active_user('id'));
+
+	if($user['user_type'] == 'corporate')
+	{
+		$query = mysqli()->query("SELECT * FROM orders WHERE status='$status'");
+		if($query)
+		{
+			return $query;
+		}
+		else
+		{
+			return true;
+		}
+	}
+	else
+	{
+		$query = mysqli()->query("SELECT * FROM orders WHERE status='$status' AND company_id='$company_id'");
+		if($query)
+		{
+			return $query;
+		}
+		else
+		{
+			return true;
+		}
+	}
+}
+
+
+/*
+@name: orders_detail
+@description: Siparişin tüm detaylı verilerini verir
+@developer: Muhammet İnan
+@date: 04-04-2016
+@update_date: NULL
+*/
+
+function orders_detail($id)
+{
+	$query = mysqli()->query("SELECT * From orders WHERE id='$id'");
+	if($query)
+	{
+		$detail = $query->fetch_object();
+		return $detail;
+	}
+	else
+	{
+		return false;
+	}
+}
+
+
+/*
+@name: get_ready_orders_count
+@description: hazıralnan siparişlerin sayısını verir
+@developer: Muhammet İnan
+@date: 04-04-2016
+@update_date: NULL
+*/
+function get_ready_orders_count($company_id, $status)
+{
+	$user = get_user(active_user('id'));
+	if($user['user_type'] == 'corporate')
+	{
+		$result = mysqli()->query("SELECT * FROM orders WHERE status='$status'");
+		return $result->num_rows;
+	}
+	else
+	{
+		$result = mysqli()->query("SELECT * FROM orders WHERE company_id='$company_id' and status='$status'");
+		return $result->num_rows;
+	}
+}
+
+
+/*
+@name: orders_case
+@description: orders ın status değerlerini değiştirmeye yarar
+@developer: Muhammet İnan
+@date: 05-04-2016
+@update_date: NULL
+*/
+function orders_case($id, $status)
+{
+	$date_update = date('Y-m-d H:i:s');
+	$query = mysqli()->query("UPDATE orders SET status='$status', date_update='$date_update' WHERE id='$id'");
+	if($query)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+
+}
+
+/*
+@name: orders_reporting
+@description: sipariş raporlarını alınmasını sağlar
+@developer: Muhammet İnan
+@date: 05-04-2016
+@update_date: NULL
+*/
+function orders_reporting($array='')
+{
+		if(isset($array['start_date'])){ $start_date = $array['start_date'];} else { $start_date = date("Y-m-d H:i:s"); }
+		$end_date = $array['end_date'];
+		$start_date;
+
+		$query = mysqli()->query("SELECT * FROM orders WHERE date >= '$start_date' AND date <= '$end_date'");
+		return $query->num_rows;
+}
+
+
+
 /* ------------------------------------------------------------------------------- */
 /*  *****.  LOG
 /* ------------------------------------------------------------------------------- */
@@ -1088,6 +1214,44 @@ function get_user($query_or_ID_or_email_or_phone)
 
 }
 
+/*
+@name: get_list_user
+@description: user tablosundaki verileri liste halinde çekmemizi sağlar
+@developer: Muhammet İnan
+@date: 06-04-2016
+@update_date: NULL
+*/
+
+function get_list_user()
+{
+	$result = mysqli()->query("SELECT * FROM users");
+	if($result->num_rows > 0)
+	{
+		return $result;
+	}
+}
+
+/*
+@name: status_user
+@description: site yöneticisinin kullanıcıları yönetmesini sağlar
+@developer: Muhammet İnan
+@date: 06-04-2016
+@update_date: NULL
+*/
+
+function status_user($id, $status)
+{
+	$qeury = mysqli()->query("UPDATE users SET status='$status' WHERE id='$id'");
+	if($qeury)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+
+}
 
 
 /*
@@ -1184,8 +1348,9 @@ function page_access($value)
 	else if($value == 'user')
 	{
 		if(!is_login()){ header("Location: ".theme_url('login.php')); exit(); }
-		else if(active_user('user_type') != 'user'){ header("Location: ".site_url()); exit(); }
+		else if(active_user('user_type') != 'user'){ header("Location: ".site_url()); exit; }
 		else { return true; }
+
 	}
 }
 
@@ -1607,9 +1772,40 @@ function is_form_error()
 
 
 
+/*
+@name: date_translate
+@description: ingilice verilen tarihi, ayı veya günü türkçesine değiştirir.
+@developer: Muhammet İnan
+@date: 05-04-2015
+@update_date: Null
+*/
 
-
-
+function date_translate($mounts)
+{
+	$mounts = array(
+	'January'=>'Ocak',
+	'February'=>'Şubat',
+	'March'=>'Mart',
+	'April'=>'Nisan',
+	'May'=>'Mayıs',
+	'June'=>'Haziran',
+	'July'=>'Temmuz',
+	'August'=>'Ağustos',
+	'September'=>'Eylül',
+	'October'=>'Ekim',
+	'November'=>'Kasım',
+	'December'=>'Aralık',
+	'Monday'=>'Pazartesi',
+	'Tuesday'=>'Salı',
+	'Wednesday'=>'Çarşamba',
+	'Thursday'=>'Perşembe',
+	'Friday'=>'Cuma',
+	'Saturday'=>'Cumartesi',
+	'Sunday'=>'Pazar',
+	);
+	$translate =  strtr(date("F"), $mounts);
+	return $translate;
+}
 
 
 

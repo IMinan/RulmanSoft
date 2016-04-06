@@ -1,7 +1,6 @@
 <?php include('_inc/header.php'); ?>
 <?php page_access('corporate'); ?>
 
-
 <div class="row">
 <div class="col-md-3">
 	<?php include('_inc/sidebar.php'); ?>

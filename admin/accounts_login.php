@@ -17,7 +17,7 @@
 			$username = convert_gsm(form_input_control($_POST['username']));
 			$password = form_input_control($_POST['password']);
 
-			$query = mysqli_query(mysqli(), "SELECT * FROM users WHERE email='$username' AND password='$password' OR gsm='$username' AND password='$password'");
+			$query = mysqli_query(mysqli(), "SELECT * FROM users WHERE email='$username' AND password='$password' and status='1' OR gsm='$username' AND password='$password' and status='1'");
 
 			if($query->num_rows > 0)
 			{
@@ -30,6 +30,7 @@
 			{
 				add_log(array('type'=>'login_error', 'description'=>"$username uye girisi basarisiz."));
 				$login_error = get_alert('E-posta adresi, cep telefonu veya şifreniz hatalı olabilir. <br /> <span class="fs-11">Giriş bilgilerinizi unuttuysanız <a href="#">şifrenizi sıfırlayabilir</a> veya bizimle <a href="#">iletişime</a> geçebilirsiniz.</span>', 'Giriş Başarısız');
+				get_alert('Daha önce üye olduysanız, Üyeliğiniz onaylanmasını bekleyiniz. <br>Üyeliğiniz Aktif Edilmez ise Firmamız ile iletişime geçiniz.', '', 'warning');
 			}
 		}
 		?>

@@ -1,5 +1,5 @@
 <?php include('_inc/header.php'); ?>
-<?php page_access('corporate'); ?>
+<?php page_access('user'); ?>
 
 
 <div class="row">

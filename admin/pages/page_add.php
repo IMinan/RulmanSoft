@@ -24,10 +24,10 @@
               echo get_alert('İçerik alanı en az 10 karakter olmalı.');
             }
             else{
-              if(add_pages($title, $content))
+                $last_page_id = add_pages($title, $content);
+              if($last_page_id > 0)
               {
-                echo get_alert("Sayfa Başarılı Bir Şekilde Yüklendi", "Sayfa Yayınlandı", "success");
-                header("Refresh:2;".site_url("pages/page_list.php"));
+                header("Location: ".site_url("pages/page_edit.php?id=".$last_page_id));
               }
           } }
         ?>
@@ -41,6 +41,7 @@
           </div><!--/ .form-group /-->
 
           <div class="form-group text-right">
+            <span class="text-danger pull-left" style="font-size: 13px;">*Sayfa'yı Menu'ye Eklemek için Yayınlamanız gerekiyor..</span>
             <input type="submit" name="submit" class="btn btn-success" value="Yayınla">
           </div><!--/ .form-group /-->
         </form>
