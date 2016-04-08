@@ -15,8 +15,9 @@
       <div class="admin-menu-collapse navbar-right collapse navbar-collapse" id="bs-example-navbar-collapse-2">
         <ul class="nav navbar-nav">
           <li><a href="accounts"><i class="fa fa-user"></i> Yönetim Paneli</a></li>
-          <li><a href="#"><i class="fa fa-truck"></i> Siparişlerim</a></li>
+          <li><a href="<?php echo account_url('orders.php?status=1'); ?>"><i class="fa fa-truck"></i> Siparişlerim</a></li>
           <li><a href="accounts/message_inbox.php"><i class="fa fa-envelope"></i> Mesajlar</a></li>
+          <li><a href="#"><i class="fa fa-shopping-cart"></i> Sepetim</a></li>
         </ul>
       </div><!--/ admin-menu-collpase /-->
     </div><!--/ .row /-->

@@ -1,7 +1,6 @@
 <?php include('_inc/header.php'); ?>
 <?php page_access('corporate'); ?>
 
-
 <div class="row">
 <div class="col-md-3">
 	<?php include('_inc/sidebar.php'); ?>
@@ -16,9 +15,6 @@
 
 <?php $messages = get_in_message_list(active_user('id'), ''); ?>
 <?php $all_user = get_all_user(); ?>
-
-
-
 
 
 <?php if($messages): ?>
@@ -50,11 +46,6 @@
 	</table>
 
 <?php endif; ?>
-
-
-
-
-
 
 </div> <!-- /.col-md-9 -->
 </div> <!-- /.row -->

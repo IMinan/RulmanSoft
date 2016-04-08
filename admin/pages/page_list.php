@@ -15,6 +15,7 @@
       <table style="margin-top: 20px; " class="table table-list table-condensed table-hover table-bordered dataTable">
         <thead>
           <tr>
+            <th class="hidden"></th>
             <th class="col-md-2">İşlemler</th>
             <th class="col-md-3 col-xs-6">Başlık</th>
             <th class="col-md-6 hidden-xs hidden-sm">Makale</th>
@@ -23,6 +24,7 @@
         <tbody>
           <?php while($lists = $results->fetch_object()): if($lists->status == 1): ?>
             <tr>
+              <td class="hidden"></td>
               <td>
                 <a href="<?php echo theme_url('pages.php?id=').$lists->id; ?>" class="btn btn-default btn-xs">Önizleme</a>
                 <a href="<?php echo site_url('pages/page_edit.php?id=').$lists->id; ?>" data-toggle="tooltip" data-placement="top" title="Düzenle" class="btn btn-default edit_btn btn-xs"><i class="fa fa-pencil"></i></a>

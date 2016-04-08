@@ -1,5 +1,4 @@
 <?php
-
 /* Rulman Soft Hazır Codlar ve Tanımları */
 /*---------------------------- Pages.php Sayfası için ----------------------------*/
   $page = get_page($_GET['id']); // get_pages fonksiyonu ile pages tablosundaki verileri alabiliyoruz

@@ -78,7 +78,6 @@ session_start();
 
 	<!-- custom style -->
 	<link rel="stylesheet" href="<?php echo account_url('css/app.css'); ?>">
-	<script src="<?php echo account_url('js/app.js'); ?>"></script>
   <script src="<?php echo account_url('js/nicEdit.js'); ?>"></script>
 	<script src="<?php echo account_url('js/app.js'); ?>"></script>
 
@@ -110,20 +109,21 @@ session_start();
 <div class="container bg">
 	<div class="rl-menu-top">
 		<div class="row">
-			<div class="col-xs-3 col-sm-5 col-md-4">
+			<div class="col-xs-3 col-sm-5 col-md-7">
 				<a class="navbar-brand" href="<?php echo account_url(); ?>"><span><img src="<?php echo account_url(); ?>/img/logo.png" class="img-responsive logo" alt="RulmanSoft.com Logo"></span><span class="logo-text hidden-xs">RulmanSoft</span></a>
+        <a href="<?php site_url(''); ?>" class="navbar-brand-after hidden-xs"><span class='account'>Müşteri Paneli</span> <br> <?php get_options('building_info', 'val_1', true); ?></a>
 			</div> <!-- /.col-md-4 -->
 			<div class="col-md-2 hidden-xs hidden-sm">
 
 			</div> <!-- /.col-md-2 -->
-			<div class="col-xs-9 col-sm-7 col-md-6">
+			<div class="col-xs-9 col-sm-7 col-md-5">
 				<?php if(is_login()): ?>
 					<ul class="top-menu is_login">
-						<li><a href="<?php echo account_url('message_inbox.php'); ?>"><i class="fa fa-envelope"></i><span class="count"><?php echo get_count_in_message(active_user('id')); ?></span></a></li>
-            <li><a href="<?php echo account_url('message_inbox.php'); ?>"><i class="fa fa-shopping-cart"></i><span class="count"><?php echo get_count_in_message(active_user('id')); ?></span></a></li>
-            <li><a href="<?php echo account_url('message_inbox.php'); ?>"><i class="fa fa-envelope"></i><span class="count"><?php echo get_count_in_message(active_user('id')); ?></span></a></li>
+						<li><a href="<?php echo account_url('orders.php?status=2'); ?>" class="hidden-xs"><i class="fa fa-shopping-basket"></i><span class="count"><?php echo get_ready_orders_count(active_user('id'), 2); ?></span></a></li>
+            <li><a href="<?php echo account_url('message_inbox.php'); ?>" class="hidden-xs"><i class="fa fa-shopping-cart"></i><span class="count"><?php echo get_count_in_message(active_user('id')); ?></span></a></li>
+            <li><a href="<?php echo account_url('message_inbox.php'); ?>" class="hidden-xs"><i class="fa fa-envelope"></i><span class="count"><?php echo get_count_in_message(active_user('id')); ?></span></a></li>
 
-						<li class="dropdown"><a href="#" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+						<li class="dropdown pull-right"><a href="#" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
 							<img src="<?php echo account_url('upload/profile/24/profile.jpg'); ?>">
 							<?php echo active_user('display_name'); ?>  <span class="caret"></span></a>
   							<ul class="dropdown-menu">

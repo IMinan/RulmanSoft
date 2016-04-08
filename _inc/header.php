@@ -17,7 +17,7 @@ session_start();
 <!DOCTYPE html>
 <html lang="en">
  	<head>
- 		<title><?php get_options('building_info', 'val_1', true); ?></title>
+ 		<title>Demo 1</title>
 	 	<meta charset="utf-8">
 	 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -28,58 +28,94 @@ session_start();
 
     <!--/ javascript src /-->
 	 	<script src="js/jquery.js"></script>
-		<script src="js/bootstrap.min.js"></script>
+		<script src="js/bootstrap.js"></script>
     <script src="js/main.js"></script>
-    <script src="js/validation.js"></script>
-    <script src="js/app.js"></script>
  	</head>
  	<body>
 
-  <?php include 'admin/admin_menu.php'; ?>
-  <?php include 'admin/account_menu.php'; ?>
+    <?php include 'admin/admin_menu.php'; ?>
 
-  <div class="container">
     <header>
-      <nav class="top-nav">
-        <div class="row">
-          <div class="col-md-4">
-            <a href="<?php echo $theme_url; ?>"><img src="image/logo.png" class="img-responsive logo" alt="" /></a>
-          </div><!--/ .col-md-4 /-->
+      <div class="navbar navbar-default navbar-top m-none">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-8 collapse navbar-collapse">
+              <ul class="nav navbar-nav">
+                <li><a href="index.php">Ana Sayfa</a></li>
+                <?php index_navigation(); ?>
+                <li><a href="contact.php">İletişim</a></li>
+              </ul>
+            </div><!--/ .collapse /-->
 
-          <div class="col-md-4 pull-right">
-            <div class="pull-right">
-              <a href="#"><img class="m-none" src="image/1.png" alt="" /></a>
-              <a href="#"><img style="width: 40px;" class="m-none" src="image/logo_one.png" alt="" /></a>
-            </div><!--/ .pull-right /-->
+            <div class="col-md-4 navbar-right">
+              <ul class="nav navbar-nav">
+                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                <li><a href="#"><i class="fa fa-youtube-play"></i></a></li>
+                <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+              </ul>
+            </div><!--/ .navbar-nav /-->
+          </div><!--/ .row /-->
+        </div><!--/ .container /-->
+      </div><!--/ .navbar-top /-->
 
-            <div class="pull-right">
-              <form class="" action="search.php" method="get">
-                <input type="text" class="search-input form-control" name="search" value="" placeholder="Rulman Arama..">
-                <button type="submit" class="search-button"><i class="fa fa-search"></i></button>
-              </form>
-            </div><!--/ .pull-right /-->
-          </div><!--/ .col-md-4 /-->
-        </div><!--/ .row /-->
+      <div class="header-body">
+        <div class="container">
+          <div class="row">
+            <div class="header-body-item">
+              <div class="col-md-6">
+                <a class="navbar-brand" href="index.php"><span><img src="image/logo.png" class="img-responsive logo" alt="RulmanSoft.com"></span><span class="logo-text">RulmanSoft</span></a>
+              </div><!--/ .col-md-6 /-->
 
-        <div class="top-menu navbar">
-          <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+              <div class="col-md-6 pull-right m-none">
+                <div class="phone"><i class="fa fa-mobile"></i> Call Us: <?php get_options('phone', 'val_1', true); ?></div>
+                <div class="emails"><i class="fa fa-envelope"></i> <?php get_options('email', 'val_1', true); ?></div>
+              </div>
+            </div><!--/ .header-bodu-item /-->
+          </div><!--/ .row /-->
+        </div><!--/ .header-body/-->
+      </div><!--/ .header-body /-->
+    </header>
+
+    <div class="container BW main-container">
+      <div class="row">
+        <nav class="navbar navbar-default navbar-header">
+          <div class="col-md-2 col-xs-12 pull-right">
+            <button type="button" class="pull-left ml10 navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
               <span class="sr-only">Toggle navigation</span>
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-          </div><!--/ .navbar-header /-->
 
-          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <div class="search">
+              <i class="fa fa-search"></i>
+
+              <div class="search-box">
+                <form method="get" action="search.php">
+                  <div class="row no-space">
+                    <div class="col-md-9 col-xs-9">
+                      <input type="text" name="search" class="form-control" placeholder="Rulman Numarası">
+                    </div><!--/ .col-md-9 /-->
+                    <div class="col-md-3 col-xs-3">
+                      <input type="submit" value="Ara">
+                    </div><!--/ .col-md-3 /-->
+                  </div><!--/ .row /-->
+                </form>
+              </div><!--/ .search-box /-->
+            </div><!--/ .search /-->
+          </div><!--/ .col-md-2s /-->
+
+          <div class="collapse navbar-collapse col-md-10" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-              <li><a href="<?php echo $theme_url; ?>">Ana Sayfa</a></li>
+              <li><a href="index.php">Ana Sayfa</a></li>
               <?php index_navigation(); ?>
-              <li><a href="<?php echo $theme_url."/contact.php"; ?>">İletişim</a></li>
-              <li><a href="<?php echo $theme_url."/register.php"; ?>">Üye ol</a></li>
-              <li><a href="<?php echo $theme_url."/login.php"; ?>">Giriş</a></li>
+              <?php if(is_login()): ?>
+              <li><a href="login.php">Girişi Yap</a></li>
+              <li><a href="register.php">Üye ol</a></li>
+              <?php endif; ?>
+              <li><a href="contact.php">İletişim</a></li>
             </ul>
-          </div><!--/ .collapse /-->
-        </div><!--/ .top-menu /-->
-      </nav>
-    </header>
+          </div><!--/ .collpase /-->
+        </nav>
+      </div><!--/ .row /-->

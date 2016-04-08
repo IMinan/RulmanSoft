@@ -1,53 +1,67 @@
-<?php include '_inc/header.php'; ?>
+<?php include '_inc/header.php'; //Get Header ?>
+  <div class="paragraf p30">
+    <div class="title">
+      <h2 class="CG inline">İletişim</h2> <span class="ml30 m-none">İletişim ve Adres Bilgileri Aşağıda Yer Almakta</span>
+    </div>
+  </div><!--/ .paragraf /-->
+
+  <div class="row no-space pr10">
+    <div class="col-md-8">
+      <img src="image/map.png" class="p20 img-responsive" alt="" />
+    </div><!--/ .col-md-8 /-->
+
+    <div class="col-md-4 CLG">
+      <div class="title mt20">
+        <h4><b>Hakkımızda</b></h4>
+        <hr class="mtb10">
+        <p class="f12">You can use these information to contact us or Just using the form below.</p>
+      </div>
+
+      <div class="title mt20">
+        <h4><b>İletişim Bilgileri</b></h4>
+        <hr class="mtb10">
+        <p class="f12">
+          <span><?php get_options('building_info', 'val_1', true); ?></span><br>
+          <span><?php get_options('address', 'val_1', true); ?></span><br>
+          <span><?php get_options('city', 'val_1', true); ?> <?php get_options('country', 'val_1', true); ?></span><br>
+          <span>Call : <?php get_options('phone', 'val_1', true); ?> </span><br>
+          <span>Email : <?php get_options('email', 'val_1',  true); ?></span><br>
+        </p>
+      </div>
+
+      <div class="title mt20">
+        <h4><b>Sosyal medya</b></h4>
+        <hr class="mtb10">
+        <p class="f12">Facebook: <a href="#"><?php get_options('facebook', 'val_1', true); ?></p>
+        <p class="f12">Twitter: <a href="#"><?php get_options('twitter', 'val_1', true); ?></a></p>
+      </div>
+    </div><!--/ .col-md-4 /-->
+  </div><!--/ .row /-->
 
   <div class="row">
-    <div class="col-md-6">
-      <table class="table table-hover table-bordered">
-        <tr class="row">
-          <th class="col-md-4">Firma Adı: </th>
-          <td class="col-md-8"><?php get_options('building_info', 'val_1', true); ?></td>
-        </tr>
+    <div class="col-md-8">
+      <form class="form-contact mtb40">
+        <div class="col-md-7">
+          <span>İsim*</span><br>
+          <input type="text" name="name" value="">
+        </div>
 
-        <tr class="row">
-          <th class="col-md-4">Firma Telefon: </th>
-          <td class="col-md-8"><?php get_options('phone', 'val_1', true); ?></td>
-        </tr>
+        <div class="col-md-7">
+          <span>Email*</span><br>
+          <input type="email" name="name" value="" >
+        </div>
 
-        <tr class="row">
-          <th class="col-md-4">Yetkili Kişi Telefon: </th>
-          <td class="col-md-8"><?php get_options('mobile_phone', 'val_1', true); ?></td>
-        </tr>
+        <div class="col-md-12">
+          <span>Mesaj*</span><br>
+          <textarea name="message" rows="8" cols="40"></textarea>
+        </div>
 
-        <tr class="row">
-          <th class="col-md-4">E-Mail: </th>
-          <td class="col-md-8"><?php get_options('email', 'val_1', true); ?></td>
-        </tr>
-
-        <tr class="row">
-          <th class="col-md-4">Fax: </th>
-          <td class="col-md-8"><?php get_options('fax', 'val_1', true); ?></td>
-        </tr>
-
-        <tr class="row">
-          <th class="col-md-4">İl - İlçe: </th>
-          <td class="col-md-8"><?php get_options('province', 'val_1', true); ?></td>
-        </tr>
-
-        <tr class="row">
-          <th class="col-md-4">Ülke: </th>
-          <td class="col-md-8"><?php get_options('country', 'val_1', true); ?></td>
-        </tr>
-
-        <tr class="row">
-          <th class="col-md-4">Adres Bilgileri: </th>
-          <td class="col-md-8"><?php get_options('address', 'val_1', true); ?></td
-        </tr>
-      </table>
-    </div>
-
-    <div class="col-md-6">
-      <iframe frameborder="0" height="550" marginheight="0" marginwidth="0" scrolling="no" src="https://maps.google.com/maps?f=q&amp;source=s_q&amp;hl=en&amp;geocode=&amp;q=Bendas+Rulman,+Ba%C5%9Fak%C5%9Fehir,+Turkey&amp;aq=1&amp;oq=benda%C5%9F+rulman&amp;sll=37.0625,-95.677068&amp;sspn=40.052282,79.013672&amp;t=h&amp;ie=UTF8&amp;hq=Bendas+Rulman,&amp;hnear=Ba%C5%9Fak%C5%9Fehir%2FIstanbul,+Turkey&amp;cid=7610175435778837146&amp;ll=41.098273,28.801818&amp;spn=0.00933,0.01929&amp;iwloc=A&amp;output=embed" width="450"></iframe>
-    </div>
+        <div class="col-md-12">
+          <input type="submit" class="mtb20 btn btn-nb" value="Gönder">
+        </div>
+      </form>
+    </div><!--/ .col-md-8 /-->
   </div>
 
-<?php include '_inc/footer.php'; ?>
+    <div class="col-md-4"></div>
+<?php include '_inc/footer.php'; //Get Footer ?>

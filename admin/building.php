@@ -31,7 +31,8 @@
       <form action="" method="post">
         <div class="form-group">
           <label for="building_info"><h4> <i class="fa fa-building"></i> Firma Adı</h4></label>
-          <input type="text" class="form-control" id="building_info" name="building_info" value="<?php get_options('building_info', 'val_1', true); ?>">
+          <?php $user = get_user(active_user('id')); ?>
+          <input type="text" readonly class="form-control" id="building_info" name="building_info" value="<?php echo $user['company_name']; ?>">
         </div><!--/ .form-control /-->
 
         <div class="row">

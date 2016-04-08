@@ -31,7 +31,7 @@
             <div class="content">
               <div class="row">
                 <div class="col-md-4">
-                  <a href="?id=<?php echo $lists->id; ?>"><img src="admin/upload/news/<?php if($lists->list_img){ echo $lists->list_img; }else{ echo 'img-none.png'; } ?>" class="img-responsive" alt="" /></a>
+                  <a href="?id=<?php echo $lists->id; ?>"><img src="admin/upload/news/<?php if($lists->list_img){ echo $lists->list_img; }else{ echo 'image/img-none.png'; } ?>" class="img-responsive" alt="" /></a>
                 </div>
 
                 <div class="col-md-8">

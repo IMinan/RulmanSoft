@@ -1,4 +1,4 @@
-<div class="sidebar">
+<div class="sidebar hidden-xs">
 
 
 

@@ -37,9 +37,9 @@
 
     if(!is_form_error())
   	{
-  		$corporate['status'] = '1';
+  		$corporate['status'] = '0';
   		$corporate['date'] = date('Y-m-d H:i:s');
-  		$corporate['user_type'] = 'corporate';
+  		$corporate['user_type'] = 'user';
 
   		if(is_user("gsm='".$corporate['gsm']."'") > 0) {
   			array_push($err_msg, '<strong>'.$corporate['gsm'].'</strong> telefon numarasına ait üyelik bulunmakta. Üyelik ile ilgili problem yaşıyorsanız <a href="'.site_url('iletisim').'" target="_blank">iletişim</a> sayfasından bizimle iletişime geçebilirsiniz.');
