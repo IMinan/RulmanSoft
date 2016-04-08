@@ -46,6 +46,7 @@
           <input type="text" name="name" value="">
         </div>
 
+<<<<<<< HEAD
         <div class="col-md-7">
           <span>Email*</span><br>
           <input type="email" name="name" value="" >
@@ -61,6 +62,11 @@
         </div>
       </form>
     </div><!--/ .col-md-8 /-->
+=======
+    <div class="col-md-6">
+      <?php get_options("google_map", 'val_1', true); ?>
+    </div>
+>>>>>>> origin/master
   </div>
 
     <div class="col-md-4"></div>

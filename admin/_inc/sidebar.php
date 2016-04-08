@@ -11,10 +11,17 @@
 		<div class="h20"></div>
 
 		<h3 class="module-title"><i class="fa fa-puzzle-piece"></i> Site İstatistik</h3>
+<<<<<<< HEAD
 		<p><b>Bu gün: </b><span class="text-success"><?php echo analytics_reporting(array( 'start_date'=>date('Y-m-d', strtotime('0 day',strtotime(date('Y-m-d')))), 'end_date'=>date('Y-m-d', strtotime('0 day',strtotime(date('Y-m-d')))))); ?> Görüntüleme</span></p>
 		<p><b>Dün: </b><span class="text-success"><?php echo analytics_reporting(array( 'start_date'=>date('Y-m-d', strtotime('-1 day',strtotime(date('Y-m-d')))), 'end_date'=>date('Y-m-d', strtotime('0 day',strtotime(date('Y-m-d')))))); ?> Görüntüleme</span></p>
 		<p><b>Son 7 gün: </b><span class="text-success"><?php echo analytics_reporting(array( 'start_date'=>date('Y-m-d', strtotime('-7 day',strtotime(date('Y-m-d')))), 'end_date'=>date('Y-m-d', strtotime('0 day',strtotime(date('Y-m-d')))))); ?> Görüntüleme</span></p>
 		<p><b>Bu Ay (Ocak): </b><span class="text-success"><?php echo analytics_reporting(array( 'start_date'=>date('Y-m-d', strtotime('-30 day',strtotime(date('Y-m-d')))), 'end_date'=>date('Y-m-d', strtotime('0 day',strtotime(date('Y-m-d')))))); ?> Görüntüleme</span></p>
+=======
+		<p><b>Bu gün: </b><span class="text-success">13 ziyaretçi</span></p>
+		<p><b>Dün: </b><span class="text-success">13 ziyaretçi</span></p>
+		<p><b>Son 7 gün: </b><span class="text-success">13 ziyaretçi</span></p>
+		<p><b>Bu Ay (Ocak): </b><span class="text-success">13 ziyaretçi</span></p>
+>>>>>>> origin/master
 		<div class="h20"></div>
 	<?php endif; ?>
 
