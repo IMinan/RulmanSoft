@@ -23,6 +23,7 @@
         add_options("province", $_POST['province']);
         add_options("country", $_POST['country']);
         add_options("information", $_POST['information']);
+        add_options("corporate_id", active_user('id'));
 
         echo get_alert("", "Firma Bilgileriniz Güncellendi!", "success");
       }
@@ -43,7 +44,7 @@
 
           <div class="form-group col-md-6 col-xs-12">
             <label for="mobile_phone"><h4><i class="fa fa-mobile"></i> Yetkili Kişi Telefon</h4></label>
-            <input type="text" class="form-control" id="mobile_phone" name="mobile_phone" value="<?php get_options('mobile_phone', 'val_1', true); ?>">
+            <input type="text" readonly class="form-control" id="mobile_phone" name="mobile_phone" value="<?php echo $user['gsm']; ?>">
           </div><!--/ .form-control /-->
         </div><!--/ .row /-->
 

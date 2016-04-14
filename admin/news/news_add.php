@@ -25,7 +25,6 @@
               echo get_alert('İçerik alanı en az 10 karakter olmalı.');
             }
             else{
-              error_reporting(0);
               $uploaded_img = img_upload($foo);
               $img_name = $uploaded_img->file_dst_name;
 
@@ -36,21 +35,21 @@
             }
           }
         ?>
-        <form class="" action="" method="post" enctype="multipart/form-data">
+        <form class="validate" action="" method="post" enctype="multipart/form-data">
           <div class="form-group">
-            <input type="text" name="title" class="form-control" placeholder="Haber Başlığını Giriniz">
+            <input type="text" name="title" minlength="3" class="form-control required" placeholder="Haber Başlığını Giriniz">
           </div><!--/ .form-group /-->
 
           <div class="form-group">
-            <input type="file" name="img" class="btn btn-default" value="">
+            <input type="file" name="img" class="btn btn-default required" value="">
           </div><!--/ .form-group /-->
 
           <div class="form-group">
-            <textarea name="content" style="height: 500px;" class="form-control" rows="8" cols="40"></textarea>
+            <textarea name="content" style="height: 500px;"  minlength="10" class="form-control required" rows="8" cols="40"></textarea>
           </div><!--/ .form-group /-->
 
           <div class="form-group text-right">
-            <input type="submit" name="submit" class="btn btn-success" value="Yayınla">
+            <input type="submit" name="submit" class="btn btn-success required" value="Yayınla">
           </div><!--/ .form-group /-->
         </form>
     </div><!--/ .col-md-9 /-->

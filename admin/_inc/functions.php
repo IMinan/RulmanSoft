@@ -339,7 +339,7 @@ function add_news($title, $content, $list_img)
 	$title = trim(mysqli()->real_escape_string($title));
 	$content = trim(mysqli()->real_escape_string($content));
 	$date = date("Y-m-d H:i:s");
-	$query = mysqli_query(mysqli(), "INSERT INTO news (date, title, list_img, content) VALUES ('".$date."', '".$title."', '".$list_img."', '".$content."')");
+	$query = mysqli_query(mysqli(), "INSERT INTO news (date, title, list_img, content) VALUES ('". $date ."', '".$title."', '". $list_img ."', '".$content."')");
 	if($query){
 		return true;
 	}else{ }
@@ -375,13 +375,25 @@ function edit_news($id, $title, $content, $list_img)
 @date: 27-01-2016
 @update_date: NULL
 */
-function get_list_news()
+function get_list_news($amount='')
 {
-	$result = mysqli()->query("SELECT * FROM news ORDER BY id DESC");
-	if($result->num_rows > 0){
-		return $result;
-	}else{
-		return false;
+	if($amount)
+	{
+		$result = mysqli()->query("SELECT * FROM news ORDER BY id DESC LIMIT $amount");
+		if($result->num_rows > 0){
+			return $result;
+		}else{
+			return false;
+		}
+	}
+	else
+	{
+		$result = mysqli()->query("SELECT * FROM news ORDER BY id DESC");
+		if($result->num_rows > 0){
+			return $result;
+		}else{
+			return false;
+		}
 	}
 }
 
@@ -525,8 +537,6 @@ function delete_options($meta_key)
 function img_upload($foo){
 	$new_image_name = date('YmdHis');
 	$foo->file_new_name_body =$new_image_name;
-   $foo->image_resize = true;
-   $foo->image_x = 400;
 	 $foo->image_convert = 'jpg';
    $foo->image_ratio_y = true;
    $foo->Process('../upload/news');
@@ -930,7 +940,7 @@ function get_orders($status, $company_id)
 
 	if($user['user_type'] == 'corporate')
 	{
-		$query = mysqli()->query("SELECT * FROM orders WHERE status='$status'");
+		$query = mysqli()->query("SELECT * FROM orders WHERE status='$status' ORDER BY id DESC");
 		if($query)
 		{
 			return $query;
@@ -942,7 +952,7 @@ function get_orders($status, $company_id)
 	}
 	else
 	{
-		$query = mysqli()->query("SELECT * FROM orders WHERE status='$status' AND company_id='$company_id'");
+		$query = mysqli()->query("SELECT * FROM orders WHERE status='$status' AND company_id='$company_id' ORDER BY id DESC");
 		if($query)
 		{
 			return $query;
@@ -1020,7 +1030,6 @@ function orders_case($id, $status)
 	{
 		return false;
 	}
-
 }
 
 /*
@@ -1030,19 +1039,27 @@ function orders_case($id, $status)
 @date: 05-04-2016
 @update_date: NULL
 */
-function orders_reporting($array='')
+function orders_reporting($array='', $company_id='')
 {
-		if(isset($array['start_date'])){ $start_date = $array['start_date'];} else { $start_date = date("Y-m-d H:i:s"); }
-		$end_date = $array['end_date'];
-		$start_date;
+	if(isset($array['start_date'])){ $start_date = $array['start_date'];} else { $start_date = date("Y-m-d H:i:s"); }
+	$end_date = $array['end_date'];
+	$company_id;
 
+	if($company_id)
+	{
+		$query = mysqli()->query("SELECT * FROM orders WHERE date >= '$start_date' AND date <= '$end_date' AND company_id='$company_id'");
+		return $query->num_rows;
+	}
+	else
+	{
 		$query = mysqli()->query("SELECT * FROM orders WHERE date >= '$start_date' AND date <= '$end_date'");
 		return $query->num_rows;
+	}
 }
 
 
 
-<<<<<<< HEAD
+
 
 /*
 @name: Analytics
@@ -1073,8 +1090,8 @@ function analytics()
 
 
 /*
-@name: orders_reporting
-@description: sipariş raporlarını alınmasını sağlar
+@name: analytics_reporting
+@description: websitesinin analik sonuçlarını verir
 @developer: Muhammet İnan
 @date: 05-04-2016
 @update_date: NULL
@@ -1085,21 +1102,20 @@ function analytics_reporting($array='')
 		$end_date = $array['end_date'];
 		$start_date;
 
+		$count = 0;
 		$query = mysqli()->query("SELECT * FROM options WHERE meta_key='statik' AND val_1 >= '". $start_date ."' AND val_1 <= '". $end_date ."'");
-		if($static = $query->fetch_object())
+		while($list = $query->fetch_object())
 		{
-			return $static->val_int;
+			$count = $count+$list->val_int;
 		}
-		else
-		{
-			echo '0';
-		}
+
+		return $count;
+
+
 
 }
 
 
-=======
->>>>>>> origin/master
 /* ------------------------------------------------------------------------------- */
 /*  *****.  LOG
 /* ------------------------------------------------------------------------------- */
@@ -1585,10 +1601,34 @@ function get_count_in_message($in_user_id, $reading='0')
 }
 
 
+/*
+@name: add_fast_message
+@description: sitenin iletişim footer ve diğer yerlerinde bulunan hızlı mail bölümleri içindir
+@developer: Muhammet İnan
+@date: 12/04/2016
+@update_date: NULL
+*/
 
+function add_fast_message($array=array())
+{
+	foreach($array as $name=>$value)
+	{
+		if(isset($table_name)){$table_name = $table_name.', '.$name;}else{$table_name = $name;}
+		if(isset($table_value)){$table_value = $table_value.", '".$value."'";}else{$table_value = "'".$value."'";}
+	}
 
+	$query = mysqli()->query("INSERT INTO message (". $table_name .") VALUE (". $table_value .")");
+	if($query)
+	{
+		return true;
+	}
+	else
+	{
+		echo mysqli()->error;
+		exit;
 
-
+	}
+}
 
 
 

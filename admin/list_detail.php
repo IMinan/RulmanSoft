@@ -1,4 +1,3 @@
-
 <div class="row">
 	<div class="col-md-1"></div>
 <div class="col-md-10 col-xs-12" itemscope itemtype="http://schema.org/Product">
@@ -241,15 +240,13 @@
 						get_alert('Tüm Bölümleri Dorğru girdiğinizden emin olduktan sonra tekrar deneyiniz.', '', 'danger', false);
 					}
 				}
-
-
 			}
 			?>
 
 			<?php if($list['price'] == 0){ $message = 'Merhaba, '.brand($list['brand_id']).' '.$list['code'].' '.$list['code_type'].' ürününüz ile ilgili fiyat teklifi alabilir miyim?'; } else { $message = ''; } ?>
 
 				<div class="bg-warning p10 radius3">
-					<form name="form_message" id="form_message" action="" method="POST" class="validate">
+					<form name="form_message" id="form_message" action="" method="POST" class="validate_2">
 						<legend><i class="fa fa-envelope-o"></i> Satıcı firmaya mesaj gönderin</legend>
 						<div class="form-group">
 							<input type="text" name="name_surname" id="name_surname" class="form-control input-sm required" minlength="3" maxlength="30" placeholder="Adınız Soyadınız" value="<?php echo $current_user['name']; ?> <?php echo $current_user['surname']; ?>">

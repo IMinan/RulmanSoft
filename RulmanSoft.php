@@ -44,6 +44,8 @@
   /* Adres Bilgileri */
   get_options('address', 'val_1', true);
 
+  /* Firma hakıımızda bilgileri */
+  get_options('information', 'val_1', true);
 /*----------------------------/ Sosyal Medya /-----------------------------------*/
   /* Facebook */
   get_options('facebook', 'val_1', true);

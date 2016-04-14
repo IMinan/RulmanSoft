@@ -14,7 +14,7 @@
       <div class="title mt20">
         <h4><b>Hakkımızda</b></h4>
         <hr class="mtb10">
-        <p class="f12">You can use these information to contact us or Just using the form below.</p>
+        <p class="f12"><?php  get_options('information', 'val_1', true); ?></p>
       </div>
 
       <div class="title mt20">
@@ -32,41 +32,70 @@
       <div class="title mt20">
         <h4><b>Sosyal medya</b></h4>
         <hr class="mtb10">
-        <p class="f12">Facebook: <a href="#"><?php get_options('facebook', 'val_1', true); ?></p>
-        <p class="f12">Twitter: <a href="#"><?php get_options('twitter', 'val_1', true); ?></a></p>
+        <p class="f12">Facebook: <a href="<?php get_options('facebook', 'val_1', true); ?>"><?php get_options('facebook', 'val_1', true); ?></p>
+        <p class="f12">Twitter: <a href="<?php get_options('facebook', 'val_1', true); ?>"><?php get_options('twitter', 'val_1', true); ?></a></p>
       </div>
     </div><!--/ .col-md-4 /-->
   </div><!--/ .row /-->
 
   <div class="row">
     <div class="col-md-8">
-      <form class="form-contact mtb40">
+      <?php
+        $corporate_id = get_options('corporate_id', 'val_1', false);  $user = get_user($corporate_id);
+
+        if(isset($_POST['contact_message']) and isset($_POST['microtime']))
+        {
+          $message['name_surname'] = form_input_control($_POST['name_surname']);
+          $message['email'] = form_input_control($_POST['email']);
+          $message['phone'] = form_input_control($_POST['phone']);
+          $message['description'] = form_input_control($_POST['description']);
+          $message['microtime'] = $_POST['microtime'];
+          $message['in_user_id'] = $user['id'];
+          $message['date'] = date('Y-m-d H:i:s');
+
+
+          if(add_fast_message($message))
+          {
+            echo get_alert('Mesajınız ilgili Firmaya başarılı bir şekilde gönderildi.','Mesajınız Gönderildi.', 'success');
+          }
+          else
+          {
+            echo get_alert('Tüm alanları eksiksiz doldurunuz.', 'Mesaj Gönderilemedi', 'danger');
+          }
+        }
+      ?>
+
+      <form class="form-contact mtb40 validate_2" action="" method="post">
         <div class="col-md-7">
-          <span>İsim*</span><br>
-          <input type="text" name="name" value="">
+          <span>Ad - Soyad*</span><br>
+          <input type="text" name="name_surname" value="" class="required">
         </div>
 
-<<<<<<< HEAD
         <div class="col-md-7">
-          <span>Email*</span><br>
-          <input type="email" name="name" value="" >
+          <span>E-Posta*</span><br>
+          <input type="email" name="email" value="" class="required">
+        </div>
+
+        <div class="col-md-7">
+          <span>Telefon*</span><br>
+          <input type="text" name="phone" value="" minlength="10" class="required">
         </div>
 
         <div class="col-md-12">
           <span>Mesaj*</span><br>
-          <textarea name="message" rows="8" cols="40"></textarea>
+          <textarea name="description" rows="8" cols="40" minlength="10" class="required"></textarea>
         </div>
 
         <div class="col-md-12">
+          <?php html_microtime(); ?>
+          <input type="hidden" name="contact_message">
           <input type="submit" class="mtb20 btn btn-nb" value="Gönder">
         </div>
       </form>
     </div><!--/ .col-md-8 /-->
-=======
     <div class="col-md-6">
       <?php get_options("google_map", 'val_1', true); ?>
     </div>
->>>>>>> origin/master
   </div>
 
     <div class="col-md-4"></div>

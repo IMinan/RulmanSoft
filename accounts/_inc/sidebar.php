@@ -6,13 +6,11 @@
 	<?php if(is_login()): ?>
 		<div class="h20"></div>
 
-
-		<h3 class="module-title"><i class="fa fa-puzzle-piece"></i> Site İstatistik</h3>
-		<p>Bu gün: <span class="text-success">13 ziyaretçi</span></p>
-		<p>Dün: <span class="text-success">13 ziyaretçi</span></p>
-		<p>Son 7 gün: <span class="text-success">13 ziyaretçi</span></p>
-		<p>Bu Ay (Ocak): <span class="text-success">13 ziyaretçi</span></p>
-		<div class="h20"></div>
+		<h3 class="module-title"><i class="fa fa-shopping-basket"></i> Sipariş İstatistik</h3>
+		<p><b>Bugün: </b><span class="text-primary"><?php echo orders_reporting(array( 'start_date'=>date('Y-m-d', strtotime('0 day',strtotime(date('Y-m-d')))).' 00:00:00', 'end_date'=>date('Y-m-d', strtotime('0 day',strtotime(date('Y-m-d')))).' 99:99:99' ), active_user('id')); ?> Sipariş</span></p>
+		<p><b>Dün: </b><span class="text-primary"><?php echo orders_reporting(array( 'start_date'=>date('Y-m-d', strtotime('-1 day',strtotime(date('Y-m-d')))).' 00:00:00', 'end_date'=>date('Y-m-d', strtotime('-1 day',strtotime(date('Y-m-d')))).' 99:99:99' ), active_user('id')); ?> Sipariş</span></p>
+		<p><b>Bu Hafta: </b><span class="text-primary"><?php echo orders_reporting(array( 'start_date'=>date('Y-m-d', strtotime('-7 day',strtotime(date('Y-m-d')))).' 00:00:00', 'end_date'=>date('Y-m-d', strtotime('0 day',strtotime(date('Y-m-d')))).' 99:99:99' ), active_user('id')); ?> Sipariş</span></p>
+		<p><b>Bu Ay (<?php echo date_translate(date('F')); ?>): </b><span class="text-primary"><?php echo orders_reporting(array( 'start_date'=>date('Y-m-d', strtotime('-30 day',strtotime(date('Y-m-d')))).' 00:00:00', 'end_date'=>date('Y-m-d', strtotime('0 day',strtotime(date('Y-m-d')))).' 99:99:99' ), active_user('id')); ?> Sipariş</span></p>
 
 
 

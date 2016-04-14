@@ -97,16 +97,15 @@
       <tr>
         <td><b>Satış Fiyatı</b></td>
         <td>
-          <?php if($order->currency == '0'): ?>
-            <meta itemprop="priceCurrency" content="TRY" />
-          <?php elseif($order->currency == '1'): ?>
-            <meta itemprop="priceCurrency" content="USD" />
-          <?php elseif($order->currency == '1'): ?>
-            <meta itemprop="priceCurrency" content="EUR" />
-          <?php endif; ?>
+          <?php echo $order->sale_price; ?>
 
-          <span itemprop="price"><?php echo $order->sale_price; ?> <?php echo currency_to_text($order->currency); ?></span>
-          <link itemprop="availability" href="http://schema.org/InStock"/>
+          <?php if($order->currency == '0'): ?>
+            ₺
+          <?php elseif($order->currency == '1'): ?>
+            $
+          <?php elseif($order->currency == '2'): ?>
+            €
+          <?php endif; ?>
         </td>
       </tr>
     </thead>

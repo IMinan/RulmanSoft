@@ -14,10 +14,10 @@
 
       <div class="admin-menu-collapse navbar-right collapse navbar-collapse" id="bs-example-navbar-collapse-2">
         <ul class="nav navbar-nav">
-          <li><a href="admin"><i class="fa fa-user"></i> Admin Paneli</a></li>
-          <li><a href="#"><i class="fa fa-truck"></i> Gelen Siparişler</a></li>
-          <li><a href="admin/list_add.php"><i class="fa fa-plus"></i> Yeni Stok Kartı</a></li>
-          <li><a href="admin/message_inbox.php"><i class="fa fa-envelope"></i> Mesajlar</a></li>
+          <li><a href="<?php echo site_url(); ?>"><i class="fa fa-user"></i> Admin Paneli</a></li>
+          <li><a href="<?php echo site_url('orders.php?status=1'); ?>"><i class="fa fa-truck"></i> Gelen Siparişler</a></li>
+          <li><a href="<?php echo site_url('list_add.php'); ?>"><i class="fa fa-plus"></i> Yeni Stok Kartı</a></li>
+          <li><a href="<?php echo site_url('message_inbox.php'); ?>"><i class="fa fa-envelope"></i> Mesajlar</a></li>
         </ul>
       </div><!--/ admin-menu-collpase /-->
     </div><!--/ .row /-->

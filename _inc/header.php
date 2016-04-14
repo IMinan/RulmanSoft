@@ -17,23 +17,25 @@ session_start();
 <!DOCTYPE html>
 <html lang="en">
  	<head>
- 		<title>Demo 1</title>
+ 		<title><?php get_options('building_info', 'val_1', true); ?></title>
 	 	<meta charset="utf-8">
 	 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!--/ css link /-->
+    <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
  		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
  		<link rel="stylesheet" type="text/css" href="main.css">
- 		<link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
 
     <!--/ javascript src /-->
-	 	<script src="js/jquery.js"></script>
-		<script src="js/bootstrap.js"></script>
+    <script src="js/jquery.js"></script>
+    <script src="js/validation.js"></script>
+    <script src="js/bootstrap.min.js"></script>
     <script src="js/main.js"></script>
  	</head>
  	<body>
 
     <?php include 'admin/admin_menu.php'; ?>
+    <?php include 'admin/account_menu.php'; ?>
 
     <header>
       <div class="navbar navbar-default navbar-top m-none">
@@ -49,10 +51,10 @@ session_start();
 
             <div class="col-md-4 navbar-right">
               <ul class="nav navbar-nav">
-                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                <li><a href="#"><i class="fa fa-youtube-play"></i></a></li>
-                <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                <li><a href="<?php get_options('facebook', 'val_1', true); ?>"><i class="fa fa-facebook"></i></a></li>
+                <li><a href="<?php get_options('twitter', 'val_1', true); ?>"><i class="fa fa-twitter"></i></a></li>
+                <li><a href="<?php get_options('instagram', 'val_1', true); ?>"><i class="fa fa-instagram"></i></a></li>
+                <li><a href="<?php get_options('google_plus', 'val_1', true); ?>"><i class="fa fa-google-plus"></i></a></li>
               </ul>
             </div><!--/ .navbar-nav /-->
           </div><!--/ .row /-->
@@ -68,7 +70,7 @@ session_start();
               </div><!--/ .col-md-6 /-->
 
               <div class="col-md-6 pull-right m-none">
-                <div class="phone"><i class="fa fa-mobile"></i> Call Us: <?php get_options('phone', 'val_1', true); ?></div>
+                <div class="phone"><i class="fa fa-mobile"></i> Tel : <?php get_options('phone', 'val_1', true); ?></div>
                 <div class="emails"><i class="fa fa-envelope"></i> <?php get_options('email', 'val_1', true); ?></div>
               </div>
             </div><!--/ .header-bodu-item /-->
@@ -110,11 +112,11 @@ session_start();
             <ul class="nav navbar-nav">
               <li><a href="index.php">Ana Sayfa</a></li>
               <?php index_navigation(); ?>
-              <?php if(is_login()): ?>
+              <?php if(!is_login()): ?>
               <li><a href="login.php">Girişi Yap</a></li>
               <li><a href="register.php">Üye ol</a></li>
               <?php endif; ?>
-              <li><a href="contact.php">İletişim</a></li>
+              <li class="pull-right"><a href="contact.php">İletişim</a></li>
             </ul>
           </div><!--/ .collpase /-->
         </nav>
